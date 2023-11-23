@@ -1,0 +1,10 @@
+DEBUG:root:received socket error [WinError 10061] No connection could be made because the target machine actively refused it
+DEBUG:root:received socket error [WinError 10061] No connection could be made because the target machine actively refused it
+DEBUG:root:received socket error [WinError 10061] No connection could be made because the target machine actively refused it
+DEBUG:root:received socket error [WinError 10061] No connection could be made because the target machine actively refused it
+DEBUG:root:waiting for connection...
+DEBUG:root:connected
+DEBUG:root:client entered an invalid request
+DEBUG:root:server received: TIME
+DEBUG:root:server received: EXIT
+DEBUG:root:user disconnected
