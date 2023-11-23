@@ -8,3 +8,12 @@ DEBUG:root:client entered an invalid request
 DEBUG:root:server received: TIME
 DEBUG:root:server received: EXIT
 DEBUG:root:user disconnected
+DEBUG:root:waiting for connection...
+DEBUG:root:waiting for connection...
+DEBUG:root:waiting for connection...
+DEBUG:root:connected
+DEBUG:root:server received: TIME
+DEBUG:root:received socket error on client socket[WinError 10053] An established connection was aborted by the software in your host machine
+DEBUG:root:user disconnected
+DEBUG:root:connected
+DEBUG:root:server received: TIME

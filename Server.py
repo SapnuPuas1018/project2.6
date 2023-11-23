@@ -21,8 +21,9 @@ SERVER_NAME = 'best server ever'
 def return_answer(request):
     """
     :param request:
-    :return: dt_string or SERVER_NAME or random_number
-    :rtype: str or int
+    :type request: str
+    :return: dt_string | SERVER_NAME | random_number
+    :rtype: str | int
     """
     if request == 'TIME':
         seconds = time.time()
@@ -41,7 +42,7 @@ def return_answer(request):
 def protocol(response, client_socket):
     """
     :param response:
-    :type response: any
+    :type response:
     :param client_socket:
     :return:
     """

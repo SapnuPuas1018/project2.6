@@ -16,7 +16,6 @@ MAX_PACKET = 1024
 
 def protocol(my_socket):
     """
-
     :param my_socket:
     :return:
     """
