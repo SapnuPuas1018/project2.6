@@ -1,9 +1,12 @@
 """
 author - Yuval Hayun
-date   - 17/11/23
+date   - 23/11/23
 socket client
 """
 import socket
+import logging
+
+logging.basicConfig(filename='my_log.log', level=logging.DEBUG)
 
 SERVER_IP = '127.0.0.1'
 SERVER_PORT = 16240
@@ -12,6 +15,11 @@ MAX_PACKET = 1024
 
 
 def protocol(my_socket):
+    """
+
+    :param my_socket:
+    :return:
+    """
     response = ''
     message_len = ''
     while response != '!':
@@ -30,16 +38,18 @@ def main():
     my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         my_socket.connect(('127.0.0.1', SERVER_PORT))
+        logging.debug('connected')
         request = ""
         while request != "EXIT":
             request = input('enter your request here: ')
-            if request == 'TIME' or request == 'NAME' or request == 'RAND' or request == 'EXIT' or request == 'DUMP':
+            if request == 'TIME' or request == 'NAME' or request == 'RAND' or request == 'EXIT':
                 my_socket.send(request.encode())
                 protocol(my_socket)
             else:
                 print('invalid')
+                logging.debug('client entered an invalid request')
     except socket.error as err:
-        print('received socket error ' + str(err))
+        logging.debug('received socket error ' + str(err))
     finally:
         my_socket.close()
 

@@ -1,11 +1,14 @@
 """
 author - Yuval Hayun
-date   - 17/11/23
+date   - 23/11/23
 socket server
 """
 import time
 import socket
 import random
+import logging
+
+logging.basicConfig(filename='my_log.log', level=logging.DEBUG)
 
 IP = '0.0.0.0'
 PORT = 16240
@@ -16,6 +19,11 @@ SERVER_NAME = 'best server ever'
 
 
 def return_answer(request):
+    """
+    :param request:
+    :return: dt_string or SERVER_NAME or random_number
+    :rtype: str or int
+    """
     if request == 'TIME':
         seconds = time.time()
         local_time = time.ctime(seconds)
@@ -28,14 +36,15 @@ def return_answer(request):
         return random_number
     elif request == 'EXIT':
         return 'exit'
-    elif request == 'DUMP':
-
-        random_number = random.randint(1, 10000)
-        print("DUMP request: returning " + str(random_number) + " As")
-        return 'A' * random_number
 
 
 def protocol(response, client_socket):
+    """
+    :param response:
+    :type response: any
+    :param client_socket:
+    :return:
+    """
     response = str(response)
     client_socket.send((str(len(response)) + '!').encode())
     client_socket.send(response.encode())
@@ -46,21 +55,23 @@ def main():
     try:
         my_socket.bind(('0.0.0.0', PORT))
         my_socket.listen(QUEUE_LEN)
+        logging.debug('waiting for connection...')
         while True:
             client_socket, client_address = my_socket.accept()
             response = ''
             try:
                 while response != 'exit':
                     request = client_socket.recv(MAX_PACKET).decode()
+                    logging.debug('server received: ' + request)
                     response = return_answer(request)
-                    print('server received ' + request)
                     protocol(response, client_socket)
             except socket.error as err:
-                print('received socket error on client socket' + str(err))
+                logging.debug('received socket error on client socket' + str(err))
             finally:
                 client_socket.close()
+                logging.debug('user disconnected')
     except socket.error as err:
-        print('received socket error on server socket' + str(err))
+        logging.debug('received socket error on server socket' + str(err))
     finally:
         my_socket.close()
 
